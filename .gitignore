@@ -34,3 +34,7 @@ yesod-devel/
 *~
 \#*
 luff-line.cabal
+.updo
+updo
+project-nix
+project-versions.nix
