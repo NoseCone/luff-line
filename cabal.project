@@ -1,0 +1,11 @@
+import: https://stackage.org/lts-20.26/cabal.config
+
+-- We have 1 package.
+packages:
+    .
+
+-- Version equality constraints.
+
+program-options
+  ghc-options: -fhide-source-paths
+
