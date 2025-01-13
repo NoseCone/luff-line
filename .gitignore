@@ -33,7 +33,19 @@ yesod-devel/
 *.keter
 *~
 \#*
+
+# Ignore updo files
 .updo
 updo
 project-nix
 project-versions.nix
+
+# Don't ignore Updo makefiles and generated projects.
+!stack.yaml
+!stack.yaml.lock
+!cabal.project
+!cabal.upgrade.project
+!stack.upgrade.yaml
+!stack.upgrade.yaml.lock
+!project-files.mk
+!project-versions.mk
