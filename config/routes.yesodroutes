@@ -11,3 +11,4 @@
 /comments CommentR POST
 
 / CompsR GET
+/comp/#Text CompR GET

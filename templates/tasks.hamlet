@@ -1,0 +1,11 @@
+#{compPrefix}
+<table class="table is-striped">
+        <thead>
+                <tr>
+                        <th>#</th>
+                        <th class="th-task-name">Name</th>
+                        <th class="th-task-tps">Turnpoints</th>
+                        <th class="th-task-dist">Distance</th>
+                        <th class="th-task-stopped">Stopped</th>
+                        <th class="th-task-cancelled">Cancelled</th>
+        <tbody>
