@@ -33,7 +33,6 @@ yesod-devel/
 *.keter
 *~
 \#*
-luff-line.cabal
 .updo
 updo
 project-nix
