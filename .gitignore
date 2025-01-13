@@ -51,3 +51,5 @@ project-versions.nix
 !project-versions.mk
 
 node_modules
+static/css/site.css
+static/css/site.css.map
