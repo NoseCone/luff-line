@@ -1,0 +1,11 @@
+import: https://stackage.org/nightly-2025-01-12/cabal.config
+
+-- We have 1 package.
+packages:
+    .
+
+-- Version equality constraints.
+
+program-options
+  ghc-options: -fhide-source-paths
+
