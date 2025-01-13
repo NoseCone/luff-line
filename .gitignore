@@ -49,3 +49,5 @@ project-versions.nix
 !stack.upgrade.yaml.lock
 !project-files.mk
 !project-versions.mk
+
+node_modules
