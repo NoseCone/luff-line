@@ -31,7 +31,7 @@ getHomeR = do
         let (commentFormId, commentTextareaId, commentListId) = commentIds
         aDomId <- newIdent
         setTitle "Welcome To Yesod!"
-        $(widgetFile "homepage")
+        $(widgetFile "yd")
 
 postHomeR :: Handler Html
 postHomeR = do
@@ -45,7 +45,7 @@ postHomeR = do
         let (commentFormId, commentTextareaId, commentListId) = commentIds
         aDomId <- newIdent
         setTitle "Welcome To Yesod!"
-        $(widgetFile "homepage")
+        $(widgetFile "yd")
 
 sampleForm :: Form FileForm
 sampleForm = renderBootstrap3 BootstrapBasicForm $ FileForm
