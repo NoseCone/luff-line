@@ -1,0 +1,16 @@
+{
+  "name": "luff-line",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "style": "sass --watch site.sass:static/css/site.css --load-path ./node_modules"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bulma": "0.9.3",
+    "font-awesome": "4.7.0",
+    "sass": "1.83.1"
+  }
+}
