@@ -1,8 +1,6 @@
-name:    luff-line
-version: "0.0.0"
-
+name: luff-line
+version: 0.0.0
 dependencies:
-
 - base >=4.9.1.0 && <5
 - yesod >=1.6 && <1.7
 - yesod-core >=1.6 && <1.7
@@ -38,26 +36,32 @@ dependencies:
 - case-insensitive
 - wai
 - foreign-store
-
-# The library contains all of our application code. The executable
-# defined below is just a thin wrapper.
+flags:
+  dev:
+    description: Turn on development settings, lie auto-reload templates.
+    manual: false
+    default: false
+  library-only:
+    description: Build only for use with 'yesod devel'
+    manual: false
+    default: false
 library:
   source-dirs: src
   when:
-  - condition: (flag(dev)) || (flag(library-only))
+    condition: (flag(dev)) || (flag(library-only))
     then:
       ghc-options:
       - -Wall
       - -fwarn-tabs
       - -O0
-      cpp-options: -DDEVELOPMENT
+      cpp-options:
+      - -DDEVELOPMENT
     else:
       ghc-options:
       - -Wall
       - -fwarn-tabs
       - -O2
-
-# Runnable executable for our application
+      cpp-options: []
 executables:
   luff-line:
     main: main.hs
@@ -66,13 +70,10 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
-    dependencies:
-    - luff-line
+    dependencies: luff-line
     when:
-    - condition: flag(library-only)
+      condition: flag(library-only)
       buildable: false
-
-# Test suite
 tests:
   luff-line-test:
     main: Spec.hs
@@ -83,13 +84,3 @@ tests:
     - hspec >=2.0.0
     - yesod-test
 
-# Define flags used by "yesod devel" to make compilation faster
-flags:
-  library-only:
-    description: Build for use with "yesod devel"
-    manual: false
-    default: false
-  dev:
-    description: Turn on development settings, like auto-reload templates.
-    manual: false
-    default: false
