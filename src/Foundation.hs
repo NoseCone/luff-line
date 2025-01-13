@@ -117,18 +117,18 @@ instance Yesod App where
         -- you to use normal widget features in default-layout.
 
         case mcurrentRoute of
-            (Just CompsR) -> do
-                pc <- widgetToPageContent $ do
-                    addStylesheet $ StaticR css_site_css
-                                            -- ^ generated from @Settings/StaticFiles.hs@
-                    $(widgetFile "ft-layout")
-                withUrlRenderer $(hamletFile "templates/ft-layout-wrapper.hamlet")
-            _ -> do
+            (Just HomeR) -> do
                 pc <- widgetToPageContent $ do
                     addStylesheet $ StaticR css_bootstrap_css
                                             -- ^ generated from @Settings/StaticFiles.hs@
                     $(widgetFile "yd-layout")
                 withUrlRenderer $(hamletFile "templates/yd-layout-wrapper.hamlet")
+            _ -> do
+                pc <- widgetToPageContent $ do
+                    addStylesheet $ StaticR css_site_css
+                                            -- ^ generated from @Settings/StaticFiles.hs@
+                    $(widgetFile "ft-layout")
+                withUrlRenderer $(hamletFile "templates/ft-layout-wrapper.hamlet")
 
     isAuthorized
         :: Route App  -- ^ The route the user is visiting.
