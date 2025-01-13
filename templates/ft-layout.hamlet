@@ -1,0 +1,16 @@
+<main>
+        <div class="container">
+                <div class="spacer" >
+                ^{widget}
+
+<footer class="footer">
+        <div class="container">
+                <div class="content">
+                        <div class="is-size-7">
+                                <strong title="Flare Timing">Flare Timing</strong> by
+                                <a href="http://www.blockscope.com" target="_blank">Block Scope</a><br />(<a
+                                        href="http://www.flaretiming.com/about.html"
+                                        target="_blank">About</a>,
+                                <a href="http://www.flaretiming.com/disclaim.html" target="_blank">Disclaimer</a>,
+                                <a href="http://www.flaretiming.com/blog.html" target="_blank">Blog</a>)<br /><br />Map data
+                                © <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors

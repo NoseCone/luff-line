@@ -1,10 +1,11 @@
+{-# LANGUAGE InstanceSigs #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE ViewPatterns #-}
-{-# LANGUAGE InstanceSigs #-}
 
 module Foundation where
 
@@ -14,7 +15,6 @@ import Text.Hamlet                 (hamletFile)
 import Text.Jasmine                (minifym)
 import Yesod.Core.Types            (Logger)
 import Yesod.Default.Util          (addStaticContentExternal)
-import Data.Kind            (Type)
 import qualified Yesod.Core.Unsafe as Unsafe
 import qualified Data.CaseInsensitive as CI
 import qualified Data.Text.Encoding as TE
@@ -90,7 +90,7 @@ instance Yesod App where
         master <- getYesod
         mmsg <- getMessage
 
-        mcurrentRoute <- getCurrentRoute
+        mcurrentRoute :: Maybe (Route App) <- getCurrentRoute
 
         -- Get the breadcrumbs, as defined in the YesodBreadcrumbs instance.
         (title, parents) <- breadcrumbs
@@ -116,11 +116,19 @@ instance Yesod App where
         -- value passed to hamletToRepHtml cannot be a widget, this allows
         -- you to use normal widget features in default-layout.
 
-        pc <- widgetToPageContent $ do
-            addStylesheet $ StaticR css_bootstrap_css
-                                    -- ^ generated from @Settings/StaticFiles.hs@
-            $(widgetFile "default-layout")
-        withUrlRenderer $(hamletFile "templates/default-layout-wrapper.hamlet")
+        case mcurrentRoute of
+            (Just CompsR) -> do
+                pc <- widgetToPageContent $ do
+                    addStylesheet $ StaticR css_site_css
+                                            -- ^ generated from @Settings/StaticFiles.hs@
+                    $(widgetFile "ft-layout")
+                withUrlRenderer $(hamletFile "templates/ft-layout-wrapper.hamlet")
+            _ -> do
+                pc <- widgetToPageContent $ do
+                    addStylesheet $ StaticR css_bootstrap_css
+                                            -- ^ generated from @Settings/StaticFiles.hs@
+                    $(widgetFile "default-layout")
+                withUrlRenderer $(hamletFile "templates/default-layout-wrapper.hamlet")
 
     isAuthorized
         :: Route App  -- ^ The route the user is visiting.
