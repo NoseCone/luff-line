@@ -23,21 +23,78 @@ flag library-only
 library
   exposed-modules:
       Application
+      FlareTiming.Statistics
+      FlareTiming.Time
       Foundation
       Handler.Comment
       Handler.Common
+      Handler.Comp
       Handler.Comps
       Handler.Home
       Import
       Import.NoFoundation
       Settings
       Settings.StaticFiles
+      WireTypes.Arrival
+      WireTypes.Comp
+      WireTypes.Cross
+      WireTypes.Effort
+      WireTypes.Fraction
+      WireTypes.Lead
+      WireTypes.Penalty
+      WireTypes.Pilot
+      WireTypes.Point
+      WireTypes.Reach
+      WireTypes.Route
+      WireTypes.Speed
+      WireTypes.Validity
+      WireTypes.ValidityWorking
+      WireTypes.Zone
+      WireTypes.ZoneKind
   other-modules:
       Paths_luff_line
   hs-source-dirs:
       src
+  default-extensions:
+      ConstraintKinds
+      DataKinds
+      DeriveFunctor
+      DeriveGeneric
+      DeriveAnyClass
+      DerivingStrategies
+      DisambiguateRecordFields
+      DuplicateRecordFields
+      FlexibleContexts
+      FlexibleInstances
+      GeneralizedNewtypeDeriving
+      GADTs
+      KindSignatures
+      LambdaCase
+      MonoLocalBinds
+      MultiParamTypeClasses
+      MultiWayIf
+      NamedFieldPuns
+      OverloadedStrings
+      PackageImports
+      ParallelListComp
+      PartialTypeSignatures
+      PatternSynonyms
+      QuasiQuotes
+      RankNTypes
+      RecursiveDo
+      RecordWildCards
+      ScopedTypeVariables
+      StandaloneDeriving
+      TemplateHaskell
+      TypeApplications
+      TypeFamilies
+      TypeOperators
+      TypeSynonymInstances
+      TupleSections
+      UndecidableInstances
   build-depends:
       aeson >=1.4 && <2.3
+    , attoparsec-aeson
     , base >=4.9.1.0 && <5
     , bytestring >=0.10 && <0.13
     , case-insensitive
@@ -45,6 +102,7 @@ library
     , classy-prelude-conduit ==1.5.*
     , classy-prelude-yesod ==1.5.*
     , conduit >=1.0 && <2.0
+    , conduit-extra
     , containers
     , data-default
     , directory >=1.1 && <1.4
@@ -57,7 +115,9 @@ library
     , monad-control >=0.3 && <1.1
     , monad-logger ==0.3.*
     , safe
+    , scientific
     , shakespeare >=2.0 && <2.2
+    , split
     , template-haskell
     , text >=0.11 && <2.2
     , time
@@ -86,9 +146,47 @@ executable luff-line
       Paths_luff_line
   hs-source-dirs:
       app
+  default-extensions:
+      ConstraintKinds
+      DataKinds
+      DeriveFunctor
+      DeriveGeneric
+      DeriveAnyClass
+      DerivingStrategies
+      DisambiguateRecordFields
+      DuplicateRecordFields
+      FlexibleContexts
+      FlexibleInstances
+      GeneralizedNewtypeDeriving
+      GADTs
+      KindSignatures
+      LambdaCase
+      MonoLocalBinds
+      MultiParamTypeClasses
+      MultiWayIf
+      NamedFieldPuns
+      OverloadedStrings
+      PackageImports
+      ParallelListComp
+      PartialTypeSignatures
+      PatternSynonyms
+      QuasiQuotes
+      RankNTypes
+      RecursiveDo
+      RecordWildCards
+      ScopedTypeVariables
+      StandaloneDeriving
+      TemplateHaskell
+      TypeApplications
+      TypeFamilies
+      TypeOperators
+      TypeSynonymInstances
+      TupleSections
+      UndecidableInstances
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aeson >=1.4 && <2.3
+    , attoparsec-aeson
     , base >=4.9.1.0 && <5
     , bytestring >=0.10 && <0.13
     , case-insensitive
@@ -96,6 +194,7 @@ executable luff-line
     , classy-prelude-conduit ==1.5.*
     , classy-prelude-yesod ==1.5.*
     , conduit >=1.0 && <2.0
+    , conduit-extra
     , containers
     , data-default
     , directory >=1.1 && <1.4
@@ -109,7 +208,9 @@ executable luff-line
     , monad-control >=0.3 && <1.1
     , monad-logger ==0.3.*
     , safe
+    , scientific
     , shakespeare >=2.0 && <2.2
+    , split
     , template-haskell
     , text >=0.11 && <2.2
     , time
@@ -138,9 +239,47 @@ test-suite luff-line-test
       Paths_luff_line
   hs-source-dirs:
       test
+  default-extensions:
+      ConstraintKinds
+      DataKinds
+      DeriveFunctor
+      DeriveGeneric
+      DeriveAnyClass
+      DerivingStrategies
+      DisambiguateRecordFields
+      DuplicateRecordFields
+      FlexibleContexts
+      FlexibleInstances
+      GeneralizedNewtypeDeriving
+      GADTs
+      KindSignatures
+      LambdaCase
+      MonoLocalBinds
+      MultiParamTypeClasses
+      MultiWayIf
+      NamedFieldPuns
+      OverloadedStrings
+      PackageImports
+      ParallelListComp
+      PartialTypeSignatures
+      PatternSynonyms
+      QuasiQuotes
+      RankNTypes
+      RecursiveDo
+      RecordWildCards
+      ScopedTypeVariables
+      StandaloneDeriving
+      TemplateHaskell
+      TypeApplications
+      TypeFamilies
+      TypeOperators
+      TypeSynonymInstances
+      TupleSections
+      UndecidableInstances
   ghc-options: -Wall
   build-depends:
       aeson >=1.4 && <2.3
+    , attoparsec-aeson
     , base >=4.9.1.0 && <5
     , bytestring >=0.10 && <0.13
     , case-insensitive
@@ -148,6 +287,7 @@ test-suite luff-line-test
     , classy-prelude-conduit ==1.5.*
     , classy-prelude-yesod ==1.5.*
     , conduit >=1.0 && <2.0
+    , conduit-extra
     , containers
     , data-default
     , directory >=1.1 && <1.4
@@ -162,7 +302,9 @@ test-suite luff-line-test
     , monad-control >=0.3 && <1.1
     , monad-logger ==0.3.*
     , safe
+    , scientific
     , shakespeare >=2.0 && <2.2
+    , split
     , template-haskell
     , text >=0.11 && <2.2
     , time
